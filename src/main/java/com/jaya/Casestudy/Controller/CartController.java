@@ -47,4 +47,17 @@ public class CartController {
         cartService.deleteProductById(product_id);
         return getAllProducts();
     }
+
+    @GetMapping(value = "/checkout/{total}")
+    public ModelAndView checkout(@PathVariable double total) {
+        ModelAndView modelAndView = new ModelAndView("/checkoutPage");
+        modelAndView.addObject("total", total);
+        return modelAndView;
+    }
+
+    @GetMapping(value = "/orderDetails")
+    public ModelAndView addOrder() {
+        cartService.deleteAll();
+        return getAllProducts();
+    }
 }
