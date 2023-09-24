@@ -22,11 +22,15 @@
             <td th:text="${item.productPrice}"></td>
             <td><a th:href="@{/mycart/remove/{product_id}(product_id=${item.productId})}">Remove from Cart</a></td>
         </tr>
-        <tr>
-            <td colspan="2" align="right">Total: </td>
-            <td colspan="2" align="left" th:text="${total}"></td>
-        </tr>
     </table>
 </div>
+<table width="50%" align="center" border="2px">
+    <tr>
+        <td align="right">Total: </td>
+        <td align="left" th:text="${total}"></td>
+        <td><a th:href="@{/products/allProducts}">List all Products</a></td>
+        <td><a th:href="@{/mycart/checkout/{total}(total=${total})}">Checkout</a></td>
+    </tr>
+</table>
 </body>
 </html>

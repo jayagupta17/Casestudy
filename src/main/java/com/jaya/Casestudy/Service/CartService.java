@@ -39,4 +39,11 @@ public class CartService {
         cartDAO.deleteById(prod_id);
         return count>cartDAO.count();
     }
+
+    @Transactional
+    public boolean deleteAll() {
+        long count = cartDAO.count();
+        cartDAO.deleteAll();
+        return count>cartDAO.count();
+    }
 }

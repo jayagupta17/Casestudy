@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"
+          href="../../css/main.css"/>
+    <meta charset="UTF-8">
+    <title>Checkout</title>
+</head>
+<body>
+<h1 align="center">Checkout</h1>
+<form action="#" th:action="@{/mycart/orderDetails}">
+    <table width="50%" align="center">
+        <tr>
+            <th>First Name</th>
+            <td><input type="text" name="fname"></td>
+        </tr>
+        <tr>
+            <th>Last Name</th>
+            <td><input type="text" name="lname"></td>
+        </tr>
+        <tr>
+            <th>Mobile No.</th>
+            <td><input type="text" name="mobile"></td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td><input type="text" name="email"></td>
+        </tr>
+        <tr>
+            <th>Address</th>
+            <td><input type="text" name="address"></td>
+        </tr>
+        <tr>
+            <th>Total</th>
+            <td th:text="${total}"></td>
+        </tr>
+        <tr>
+            <td><input type="submit"  value="Confirm"></td>
+            <td><input type="reset"   value="Reset"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
