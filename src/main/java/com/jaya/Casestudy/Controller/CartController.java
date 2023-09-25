@@ -64,7 +64,7 @@ public class CartController {
         return modelAndView;
     }
 
-    @GetMapping(value = "/orderDetails")
+    @PostMapping(value = "/orderDetails")
     public ModelAndView addOrder(@RequestParam("fname")String fname, @RequestParam("lname")String lname, @RequestParam("mobile")String mobile, @RequestParam("email")String email, @RequestParam("address")String address) {
         ModelAndView modelAndView = new ModelAndView("/confirmationPAGE");
         double total = 0;

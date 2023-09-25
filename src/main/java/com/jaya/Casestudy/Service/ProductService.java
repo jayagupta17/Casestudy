@@ -27,6 +27,11 @@ public class ProductService {
         return null;
     }
 
+    @Transactional(readOnly = true)
+    public List<Product> searchProducts(String str) {
+        return productDAO.searchProducts(str);
+    }
+
     @Transactional
     public boolean addOrModifyProduct(Product product) {
         Product p = productDAO.save(product);
