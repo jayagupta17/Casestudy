@@ -8,6 +8,26 @@
 </head>
 <body>
 <h1 align="center">Checkout</h1>
+<div>
+    <table width="50%" align="center" border="2px">
+        <tr>
+            <th>Product Id</th>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Remove from Cart</th>
+        </tr>
+        <tr th:each="item : ${cartItems}">
+            <td th:text="${item.productId}"></td>
+            <td th:text="${item.productName}"></td>
+            <td th:text="${item.productPrice}"></td>
+            <td><a th:href="@{/mycart/remove/{product_id}(product_id=${item.productId})}">Remove from Cart</a></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="right">Total: </td>
+            <td colspan="2" align="left" th:text="${total}"></td>
+        </tr>
+    </table>
+</div>
 <form action="#" th:action="@{/mycart/orderDetails}">
     <table width="50%" align="center">
         <tr>
@@ -29,10 +49,6 @@
         <tr>
             <th>Address</th>
             <td><input type="text" name="address"></td>
-        </tr>
-        <tr>
-            <th>Total</th>
-            <td th:text="${total}"></td>
         </tr>
         <tr>
             <td><input type="submit"  value="Confirm"></td>
