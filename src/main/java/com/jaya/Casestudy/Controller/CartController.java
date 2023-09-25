@@ -1,14 +1,14 @@
 package com.jaya.Casestudy.Controller;
 
 import com.jaya.Casestudy.Entity.Cart;
+import com.jaya.Casestudy.Entity.Order;
 import com.jaya.Casestudy.Entity.Product;
 import com.jaya.Casestudy.Service.CartService;
+import com.jaya.Casestudy.Service.OrderService;
 import com.jaya.Casestudy.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -21,6 +21,9 @@ public class CartController {
 
     @Autowired
     ProductService productService;
+
+    @Autowired
+    OrderService orderService;
 
     @GetMapping(value = "allProducts")
     public ModelAndView getAllProducts(){
@@ -48,16 +51,29 @@ public class CartController {
         return getAllProducts();
     }
 
-    @GetMapping(value = "/checkout/{total}")
-    public ModelAndView checkout(@PathVariable double total) {
+    @GetMapping(value = "/checkout")
+    public ModelAndView checkout() {
         ModelAndView modelAndView = new ModelAndView("/checkoutPage");
+        double total = 0;
+        List<Cart> products = cartService.getAllProducts();
+        for(Cart p: products) {
+            total += p.getProductPrice();
+        }
         modelAndView.addObject("total", total);
+        modelAndView.addObject("cartItems", products);
         return modelAndView;
     }
 
     @GetMapping(value = "/orderDetails")
-    public ModelAndView addOrder() {
+    public ModelAndView addOrder(@RequestParam("fname")String fname, @RequestParam("lname")String lname, @RequestParam("mobile")String mobile, @RequestParam("email")String email, @RequestParam("address")String address) {
+        ModelAndView modelAndView = new ModelAndView("/confirmationPAGE");
+        double total = 0;
+        List<Cart> products = cartService.getAllProducts();
+        for(Cart p: products) {
+            total += p.getProductPrice();
+        }
+        orderService.addOrder(new Order(mobile, fname, lname, email, address, total));
         cartService.deleteAll();
-        return getAllProducts();
+        return modelAndView;
     }
 }
