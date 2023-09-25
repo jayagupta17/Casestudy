@@ -27,5 +27,11 @@
     </tr>
   </table>
 </div>
+  <form method="post" th:action="@{/products/search}">
+    <table width="50%" align="center">
+      <td align="right"><input type="text" name="str"></td>
+      <td align="left"><input type="submit"  value="Search"></td>
+    </table>
+  </form>
 </body>
 </html>
